@@ -1,26 +1,50 @@
-name = []
-roll = []
-address = []
-
-user_name  = input("Enter name : ")
-if type(user_name) == str:
-    name.append(user_name)
-    user_roll = int(input("Enter the roll: "))
-    print(type(user_roll))
-    if type(user_roll) == int:
-        roll.append(user_roll)
-        user_address = input("Enter the address: ")
-        if type(user_address) == str:
-            address.append(user_address)
+def collect_user_data():
+    """Collect user information: name, roll number, and address."""
+    name = []
+    roll = []
+    address = []
+    
+    # Get user name
+    while True:
+        user_name = input("Enter name: ").strip()
+        if user_name and isinstance(user_name, str):
+            name.append(user_name)
+            break
         else:
-            print('fuck u')
-    else:
-         user_roll = input("Enter the roll: ")
-else:
-    print("Enter the name correctly")
-    user_name  = input("Enter name : ")
+            print("Invalid input. Please enter a valid name.")
+    
+    # Get roll number
+    while True:
+        try:
+            user_roll = int(input("Enter roll number: "))
+            if isinstance(user_roll, int):
+                roll.append(user_roll)
+                break
+        except ValueError:
+            print("Invalid input. Please enter a valid roll number.")
+    
+    # Get address
+    while True:
+        user_address = input("Enter address: ").strip()
+        if user_address and isinstance(user_address, str):
+            address.append(user_address)
+            break
+        else:
+            print("Invalid input. Please enter a valid address.")
+    
+    return name, roll, address
 
 
-print(name)
-print(roll)
-print(address)ṭ
+def main():
+    """Main function to run the program."""
+    print("=== User Information Collection ===\n")
+    name, roll, address = collect_user_data()
+    
+    print("\n=== Collected Information ===")
+    print(f"Name: {name}")
+    print(f"Roll: {roll}")
+    print(f"Address: {address}")
+
+
+if __name__ == "__main__":
+    main()
