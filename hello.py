@@ -1,3 +1,23 @@
+def is_valid_name(name):
+    """Check if name is valid (only letters and spaces, minimum 2 characters)."""
+    if not isinstance(name, str):
+        return False
+    if len(name) < 2:
+        return False
+    # Allow letters and spaces only
+    return all(char.isalpha() or char.isspace() for char in name)
+
+
+def is_valid_address(address):
+    """Check if address is valid (alphanumeric and common punctuation, minimum 5 characters)."""
+    if not isinstance(address, str):
+        return False
+    if len(address) < 5:
+        return False
+    # Allow alphanumeric, spaces, and common punctuation
+    return all(char.isalnum() or char.isspace() or char in ",-." for char in address)
+
+
 def collect_user_data():
     """Collect user information and store in a dictionary."""
     user_data = {}
@@ -5,11 +25,11 @@ def collect_user_data():
     # Get user name
     while True:
         user_name = input("Enter name: ").strip()
-        if user_name:  # Simple check - no need for isinstance after input()
+        if is_valid_name(user_name):
             user_data["name"] = user_name
             break
         else:
-            print("Invalid input. Please enter a valid name.")
+            print("Invalid input. Name must have only letters/spaces and be at least 2 characters.")
     
     # Get roll number
     while True:
@@ -23,11 +43,11 @@ def collect_user_data():
     # Get address
     while True:
         user_address = input("Enter address: ").strip()
-        if user_address:  # Simple check - no need for isinstance after input()
+        if is_valid_address(user_address):
             user_data["address"] = user_address
             break
         else:
-            print("Invalid input. Please enter a valid address.")
+            print("Invalid input. Address must have alphanumeric characters/punctuation and be at least 5 characters.")
     
     return user_data
 
